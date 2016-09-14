@@ -1,4 +1,5 @@
-# First attempt before going through video.   to_f method was only addition after video
+# First attempt before going through video.
+# to_f method was only addition after video
 
 # puts "Input first number"
 # first_number= Kernel.gets().chomp
@@ -16,11 +17,11 @@
 # puts answer
 
 def prompt(message)
- Kernel.puts("=> #{message}")
+  Kernel.puts("=> #{message}")
 end
 
-def is_valid(num)
-  num.to_i != 0
+def valid?(num)
+  num.to_i().nonzero?
 end
 
 def operation_to_message(op)
@@ -38,10 +39,10 @@ end
 
 prompt(" Hello, what is your name?")
 
-name =""
+name = ""
 
 loop do
-  name=Kernel.gets().chomp()
+  name = Kernel.gets().chomp()
   if name.empty?()
     prompt("please enter your name")
   else
@@ -52,31 +53,29 @@ end
 prompt("Hi, #{name}")
 
 loop do
-  first_number =""
+  first_number = ""
 
   loop do
     prompt("Input first number")
-    first_number= Kernel.gets().chomp()
-    if is_valid(first_number)
+    first_number = Kernel.gets().chomp()
+    if valid?(first_number)
       break
     else
       prompt("that isn't a valid number")
     end
   end
 
-  second_number =""
+  second_number = ""
 
   loop do
-
-  prompt("Input second number")
-  second_number= Kernel.gets().chomp()
-    if is_valid(second_number)
+    prompt("Input second number")
+    second_number = Kernel.gets().chomp()
+    if valid?(second_number)
       break
     else
       prompt("that isn't a valid number")
     end
   end
-
 
   operation_prompt = <<-MSG
     What operation would you like to perform?
@@ -88,10 +87,10 @@ loop do
 
   prompt(operation_prompt)
 
-  operation =""
+  operation = ""
 
   loop do
-    operation= Kernel.gets().chomp()
+    operation = Kernel.gets().chomp()
 
     if %w(+ - * /).include?(operation)
       break
@@ -102,21 +101,18 @@ loop do
 
   prompt("#{operation_to_message(operation)} the two numbers")
 
-  answer = case operation
+  case operation
   when "+" then answer = first_number.to_i + second_number.to_i
   when "-" then answer = first_number.to_i - second_number.to_i
   when "*" then answer = first_number.to_i * second_number.to_i
-  when "/"  then answer = first_number.to_f / second_number.to_f
+  when "/" then answer = first_number.to_f / second_number.to_f
   end
 
   prompt("the answer is #{answer}")
 
   prompt("do you want to calculate again?  (Y to calculate)")
 
-  unless Kernel.gets().chomp().downcase == "y"
-    break
-  end
-
+  break unless Kernel.gets().chomp().downcase().start_with?("y")
 end
 
 prompt("thank you")
