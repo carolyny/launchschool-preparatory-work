@@ -16,25 +16,26 @@
 # end
 # puts answer
 
+
+require "pry"
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
 def valid?(num)
-  num.to_i().nonzero?
+  num.to_i().nonzero?||num=="0"
 end
 
 def operation_to_message(op)
   case op
-  when "+"
-    "Adding"
-  when "-"
-    "Subtracting"
-  when "*"
-    "Multiplying"
-  when "/"
-    "Dividing"
+  when "+" then op_as_string = "Adding"
+  when "-" then op_as_string = "Subtracting"
+  when "*" then op_as_string = "Multiplying"
+  when "/" then op_as_string = "Dividing"
   end
+# x = "random"
+  return op_as_string
 end
 
 prompt(" Hello, what is your name?")
