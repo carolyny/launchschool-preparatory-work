@@ -106,8 +106,8 @@ loop do
   prompt "The dealer's first card is #{dealer_cards[0].reverse.join(' of ')}"
 
   answer = ""
-  prompt "you have won #{player_score} games," +
-        " the dealer has won #{dealer_score} games"
+  prompt "you have won #{player_score} games," \
+         " the dealer has won #{dealer_score} games"
   loop do
     loop do
       prompt "Would you like to hit (h) or stay (s)?"
@@ -121,7 +121,8 @@ loop do
       system "cls" || system('clear')
       prompt "Your cards are now #{display_cards(player_cards)}"
       prompt "Your total is #{player_total}"
-      prompt "The dealer's first card is #{dealer_cards[0].reverse.join(' of ')}"
+      prompt "The dealer's first card is " \
+             "#{dealer_cards[0].reverse.join(' of ')}"
     end
     break if busted?(player_cards) || answer == "s"
   end
@@ -144,15 +145,14 @@ loop do
   puts""
   display_winner(dealer_cards, player_cards)
   if identify_winner(dealer_cards, player_cards) == :dealer_busted ||
-    identify_winner(dealer_cards, player_cards) == :player
+     identify_winner(dealer_cards, player_cards) == :player
     player_score += 1
   elsif identify_winner(dealer_cards, player_cards) == :player_busted ||
-    identify_winner(dealer_cards, player_cards) == :dealer
+        identify_winner(dealer_cards, player_cards) == :dealer
     dealer_score += 1
-  else
   end
-  prompt "you have won #{player_score} games," +
-        " the dealer has won #{dealer_score} games"
+  prompt "you have won #{player_score} games," \
+         " the dealer has won #{dealer_score} games"
   break if player_score == 5 || dealer_score == 5
   prompt "Would you like to play again? (y or any other key to exit)"
   answer = gets.chop
@@ -164,5 +164,5 @@ if player_score == 5
 elsif dealer_score == 5
   prompt "dealer has won 5 games - the dealer is the winner"
 else
-prompt "Thanks for playing. Good bye"
+  prompt "Thanks for playing. Good bye"
 end
